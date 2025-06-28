@@ -1,14 +1,57 @@
- <!DOCTYPE html>
- <html lang="en">
- <head>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MSRview</title>
     <!-- For .png -->
-<link rel="shortcut icon" href="favicon-16x16.png" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon-16x16.png" type="image/x-icon">
 
- </head>
- <body>
-    
- </body>
- </html>
+    <!-- daisyCDN -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+</head>
+
+<body>
+
+    <header>
+        <nav class="w-11/12 mx-auto flex justify-between py-10 px-5 shadow-[0_4px_2px_0_rgba(0,0,0,0.05)] items-center">
+            <div class="logo"><img class="w-[300px]" src="assets/Logo.png" alt=""></div>
+
+            <!-- search -->
+            <!-- <div class="search">
+                <label class="input">
+                    <svg class="h-[2em] text-2xl opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none"
+                            stroke="currentColor">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.3-4.3"></path>
+                        </g>
+                    </svg>
+                    <input type="search" class="text-2xl bg-red-100 w-full min-w-[550px] " required placeholder="Search" />
+                </label>
+            </div> -->
+            <div class="search w-[550px] h-full">
+                <label class="input flex items-center gap-2 w-full border rounded-lg px-3 py-2 shadow-sm h-22">
+                    <svg class="h-15 w-15 text-3xl opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none"
+                            stroke="currentColor">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.3-4.3"></path>
+                        </g>
+                    </svg>
+                    <input type="search" class=" w-full bg-red-300 outline-none h-full text-3xl" required placeholder="Search" />
+                </label>
+            </div>
+
+
+            <div class="btn text-4xl font-bold w-32 h-20">Sort</div>
+        </nav>
+
+    </header>
+
+</body>
+
+</html>
