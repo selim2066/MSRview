@@ -67,30 +67,43 @@ function displayVid(videos) {
     const videoContainer = document.getElementById('videoContainer')
     videos.forEach(video => {
         const card = document.createElement('div')
-        const thumbnail =video.thumbnail
-        const title =video.title
-        const description = video.description
-        console.log();
-        console.log(video);
+        const thumbnail = video.thumbnail
+        const title = video.title
+        // const author = video.author
+        const author = video.authors[0].profile_name;
+        const views = video.others.views
+        const authorImg = video.authors[0].profile_picture;
+        console.log(authorImg);
+
+        console.log(author);
+        // console.log(video);
 
         card.classList.add(
             'card',
             'bg-base-100',
             'shadow-sm',
             'sm:w-[550px]',
-            'lg:w-full'
+            'lg:w-full',
+            'md:h-[550px]'
         );
-        card.innerHTML =` <figure>
-                <img src="${thumbnail
-                }" alt="Shoes" />
+        card.innerHTML = ` <figure class='h-[400px]'>
+                <img class='h-full w-full object-cover' src="${thumbnail}" alt="Shoes" />
             </figure>
-            <div class="card-body">
-                <h2 class="card-title font-bold text-3xl">${title
-                }</h2>
-                <p class="text-xl">${description}</p>
-                <div class="card-actions justify-end">
-                    <button class="btn btn-neutral btn-dash hover:bg-red-700 hover:border-none text-xl w-34 h-16">Watch</button>
+             <div class="py-3 px-1 flex gap-5">
+                <div>
+                    <img class="w-16 h-16 rounded-full object-cover" src="${authorImg}" alt="">
                 </div>
+                <div class='space-y-3'>
+                    <h2 class="card-title font-bold text-3xl">${title
+            }</h2>
+                    <div class="flex gap-3">
+                        <p class="text-xl font-semibold text-gray-500">${author}</p>
+                        <img class="w-8" src="https://img.icons8.com/?size=100&id=2AuMnRFVB9b1&format=png&color=000000"
+                            alt="">
+                    </div>
+                    <p class="text-xl">${views}</p>
+                </div>
+
             </div>
         `;
 
@@ -98,7 +111,10 @@ function displayVid(videos) {
 
     })
 }
-
+// button
+/**<div class="card-actions justify-end">
+                    <button class="btn btn-neutral btn-dash hover:bg-red-700 hover:border-none text-xl w-34 h-16">Watch</button>
+                </div> */
 // https://openapi.programming-hero.com/api/phero-tube/videos
 
 loadCategories()
