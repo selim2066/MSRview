@@ -73,7 +73,34 @@ function displayVid(videos) {
         const author = video.authors[0].profile_name;
         const views = video.others.views
         const authorImg = video.authors[0].profile_picture;
-        console.log(authorImg);
+        const verified = video.authors[0].verified
+        const postDate = video.others.posted_date
+
+       function formatFullTime(seconds) {
+  const units = [];
+
+  const years = Math.floor(seconds / (365 * 24 * 60 * 60));
+  if (years) units.push(`${years}y`);
+  seconds %= (365 * 24 * 60 * 60);
+
+  const days = Math.floor(seconds / (24 * 60 * 60));
+  if (days) units.push(`${days}d`);
+  seconds %= (24 * 60 * 60);
+
+  const hours = Math.floor(seconds / 3600);
+  if (hours) units.push(`${hours}h`);
+  seconds %= 3600;
+
+  const minutes = Math.floor(seconds / 60);
+  if (minutes) units.push(`${minutes}m`);
+
+  const secs = seconds % 60;
+  if (secs || units.length === 0) units.push(`${secs}s`); // always show seconds if nothing else
+
+  return units.join(' ');
+}
+
+        console.log(postDate);
 
         console.log(author);
         // console.log(video);
@@ -86,9 +113,17 @@ function displayVid(videos) {
             'lg:w-full',
             'md:h-[550px]'
         );
-        card.innerHTML = ` <figure class='h-[400px]'>
+        card.innerHTML = ` <figure class='h-[400px] relative'>
                 <img class='h-full w-full object-cover' src="${thumbnail}" alt="Shoes" />
+               
+
+                 ${postDate ? `<span class='absolute text-white right-4 bottom-4 bg-black p-2 rounded-md'>${formatFullTime(postDate)}</span>` : ''}
+
+
+
             </figure>
+
+
              <div class="py-3 px-1 flex gap-5">
                 <div>
                     <img class="w-16 h-16 rounded-full object-cover" src="${authorImg}" alt="">
@@ -98,8 +133,10 @@ function displayVid(videos) {
             }</h2>
                     <div class="flex gap-3">
                         <p class="text-xl font-semibold text-gray-500">${author}</p>
-                        <img class="w-8" src="https://img.icons8.com/?size=100&id=2AuMnRFVB9b1&format=png&color=000000"
-                            alt="">
+
+                        ${verified === true ? `<img class="w-8" src="https://img.icons8.com/?size=100&id=2AuMnRFVB9b1&format=png&color=000000"
+                            alt="">` : ''}
+                        
                     </div>
                     <p class="text-xl">${views}</p>
                 </div>
