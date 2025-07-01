@@ -47,8 +47,8 @@ function removeActive() {
 //! videos
 // https://openapi.programming-hero.com/api/phero-tube/video/aaac
 // fetch video data
-const loadVideos = () => {
-  fetch("https://openapi.programming-hero.com/api/phero-tube/videos")
+const loadVideos = (searchText ='') => {
+  fetch(`https://openapi.programming-hero.com/api/phero-tube/videos?title=${searchText}`)
     .then((response) => response.json())
     .then((data) => displayVid(data.videos))
     .catch((error) => console.log(error));
@@ -231,6 +231,10 @@ modalContent.innerHTML=`
   //   </div>
   // </dialog>
 }
+
+document.getElementById('searchInput').addEventListener('keyup', (e)=>{
+loadVideos(e.target.value)
+})
 
 loadCategories();
 loadVideos();
