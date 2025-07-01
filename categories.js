@@ -13,7 +13,7 @@ function displayCat(categories) {
         
         const btnContainer = document.createElement('div')
         btnContainer.innerHTML = `
-        <button onclick='showCategoryVideo(${element.category_id})' class='btn w-36 h-20 text-3xl btn-neutral btn-dash'>${element.category}
+        <button id="btn-${element.category_id}" onclick='showCategoryVideo(${element.category_id})' class='btn w-36 h-20 text-3xl btn-neutral btn-dash category-btn'>${element.category}
         </button>
         `
         catContainer.appendChild(btnContainer)
@@ -22,17 +22,44 @@ function displayCat(categories) {
     });
 }
 
-
+// category wise display ie button click , active btn
 function showCategoryVideo(id) {
     
     fetch(`https://openapi.programming-hero.com/api/phero-tube/category/${id}`)
     .then(response => response.json())
-    .then(data => displayVid(data.category))
+    .then(data => {
+    //    remove active from all btn
+    removeActive()
+
+        // add active class
+        const activeBtn=document.getElementById(`btn-${id}`)
+        console.log(activeBtn);
+        activeBtn.classList.add('active')
+
+
+        displayVid(data.category)
+    })
     // .then(data => displayVid(data))
     .catch(error => console.log(error))
 }
 
+function removeActive(){
+    const buttons =document.getElementsByClassName("category-btn")
+    for(let btn of buttons){
+       btn.classList.remove('active') 
+    }
+}
+
+
+
+
+
+
+
+
+
 //! videos
+// fetch video data
 const loadVideos = () => {
     fetch('https://openapi.programming-hero.com/api/phero-tube/videos')
     .then(response => response.json())
@@ -42,7 +69,7 @@ const loadVideos = () => {
     
 }
 
-// card showing 
+// card showing ie template 
 function displayVid(videos) {
     
     const videoContainer = document.getElementById('videoContainer')
