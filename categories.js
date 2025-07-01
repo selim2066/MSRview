@@ -59,6 +59,7 @@ function removeActive(){
 
 
 //! videos
+// https://openapi.programming-hero.com/api/phero-tube/video/aaac
 // fetch video data
 const loadVideos = () => {
     fetch('https://openapi.programming-hero.com/api/phero-tube/videos')
@@ -120,7 +121,7 @@ videoContainer.classList.add(
         
         const card = document.createElement('div')
         const thumbnail = video.thumbnail
-        const title = video.title
+    const title = video.title
         // const author = video.author
         const author = video.authors[0].profile_name;
         const views = video.others.views
@@ -178,25 +179,55 @@ videoContainer.classList.add(
         </div>
         <div class='space-y-3'>
         <h2 class="card-title font-bold text-3xl">${title
-        }</h2>
+        }
+        </h2>
+
         <div class="flex gap-3">
         <p class="text-xl font-semibold text-gray-500">${author}</p>
         
-        ${verified === true ? `<img class="w-8" src="https://img.icons8.com/?size=100&id=2AuMnRFVB9b1&format=png&color=000000"
+               ${verified === true ? `<img class="w-8" src="https://img.icons8.com/?size=100&id=2AuMnRFVB9b1&format=png&color=000000"
             alt="">` : ''}
             
             </div>
-            <p class="text-xl">${views}</p>
-            </div>
+                <p class="text-xl">${views}</p>
             
-            </div>
+            <button onclick="loadDetails('${video.video_id}')" class="btn text-xl bg-red-500 rounded-lg text-white  absolute right-5 bottom-3">details</button>
+            
             `;
             
             videoContainer.appendChild(card)
             
         })
     }
-    
+   const loadDetails =async(vid)=>{
+console.log(vid);
+const uri = `https://openapi.programming-hero.com/api/phero-tube/video/${vid}`
+const response = await fetch(uri)
+const data = await response.json()
+console.log(data.video);
+displayDetails(data.video)
+    }
+
+    function displayDetails(){
+
+document.getElementById('modalDetails')
+
+//         <!-- Open the modal using ID.showModal() method -->
+// <button class="btn" onclick="my_modal_5.showModal()">open modal</button>
+// <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
+//   <div class="modal-box">
+//     <h3 class="text-lg font-bold">Hello!</h3>
+//     <p class="py-4">Press ESC key or click the button below to close</p>
+//     <div class="modal-action">
+//       <form method="dialog">
+//         <!-- if there is a button in form, it will close the modal -->
+//         <button class="btn">Close</button>
+//       </form>
+//     </div>
+//   </div>
+// </dialog>
+    }
+
     loadCategories()
     loadVideos()
     
